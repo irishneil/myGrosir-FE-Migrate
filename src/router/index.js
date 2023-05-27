@@ -18,7 +18,6 @@ import systemWharehouseRoutes from './routes/system-warehouse'
 import userPaymentRoutes from './routes/user-payments'
 import userSettingsRoutes from './routes/user-settings'
 
-
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [

@@ -1,6 +1,6 @@
-import { fileURLToPath } from 'node:url'
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
+import { fileURLToPath } from 'node:url'
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import { defineConfig } from 'vite'
@@ -24,13 +24,13 @@ export default defineConfig({
       },
     }),
     Pages({
-      dirs: ['./src/pages'],
+      dirs: ['./src/views/pages'],
     }),
     Layouts({
       layoutsDirs: './src/layouts/',
     }),
     Components({
-      dirs: ['src/@core/components', 'src/views/demos', 'src/components'],
+      dirs: ['src/@core/components', 'src/global-components'],
       dts: true,
     }),
     AutoImport({
