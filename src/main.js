@@ -1,6 +1,6 @@
 /* eslint-disable import/order */
 import '@/@iconify/icons-bundle'
-import App from '@/App.vue'
+import App from '@/App2.vue'
 import layoutsPlugin from '@/plugins/layouts'
 import vuetify from '@/plugins/vuetify'
 import { loadFonts } from '@/plugins/webfontloader'
