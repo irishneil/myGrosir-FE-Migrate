@@ -5,6 +5,7 @@ const dashboardRoutes = [
     component: () => import("@/views/pages/dashboards/DashBoardSelector.vue"),
     meta: {
       pageTitle: "Dashboard",
+      layout: "vertical",
       breadcrumb: [
         {
           text: "Dashboard",
