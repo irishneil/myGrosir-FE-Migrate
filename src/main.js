@@ -1,6 +1,8 @@
 /* eslint-disable import/order */
 import '@/@iconify/icons-bundle'
-import App from '@/App2.vue'
+import App from '@/App.vue'
+
+// import i18n from '@/plugins/i18n'
 import layoutsPlugin from '@/plugins/layouts'
 import vuetify from '@/plugins/vuetify'
 import { loadFonts } from '@/plugins/webfontloader'
@@ -22,6 +24,8 @@ app.use(vuetify)
 app.use(createPinia())
 app.use(router)
 app.use(layoutsPlugin)
+
+// app.use(i18n)
 
 // Mount vue app
 app.mount('#app')
