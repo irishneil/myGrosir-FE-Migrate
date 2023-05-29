@@ -1,3 +1,4 @@
+import { setupLayouts } from 'virtual:generated-layouts'
 import { createRouter, createWebHistory } from 'vue-router'
 
 import authRoutes from './routes/auth'
@@ -21,35 +22,30 @@ import userSettingsRoutes from './routes/user-settings'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
-    
+
     { path: '/', redirect: '/dashboard' },
 
     ...publicRoutes,
-    ...errorRoutes,
     ...authRoutes,
-    ...dashboardRoutes,
-    ...memberManagementRoutes,
-    ...commissionManagerRoutes,
-    ...catalogueRoutes,
-    ...shopManagerRoutes,
-    ...mediaCenterRoutes,
-    ...notifacationRoutes,
-    ...systemMasterDataRoutes,
-    ...systemCommunicationRoutes,
-    ...systemAccountRoutes,
-    ...systemWharehouseRoutes,
-    ...systemTransactionRoutes,
-    ...userSettingsRoutes,
-    ...userPaymentRoutes,
-    
-    // {
-    //   path: '*',
-    //   redirect: 'error-404',
-    // },
-    
+    ...errorRoutes,
+    ...setupLayouts(dashboardRoutes),
+    ...setupLayouts(memberManagementRoutes),
+    ...setupLayouts(commissionManagerRoutes),
+    ...setupLayouts(catalogueRoutes),
+    ...setupLayouts(shopManagerRoutes),
+    ...setupLayouts(mediaCenterRoutes),
+    ...setupLayouts(notifacationRoutes),
+    ...setupLayouts(systemMasterDataRoutes),
+    ...setupLayouts(systemCommunicationRoutes),
+    ...setupLayouts(systemAccountRoutes),
+    ...setupLayouts(systemWharehouseRoutes),
+    ...setupLayouts(systemTransactionRoutes),
+    ...setupLayouts(userSettingsRoutes),
+    ...setupLayouts(userPaymentRoutes),
+
+    // Add the error routes
+    { path: '/:pathMatch(.*)*', redirect: 'error-404' }, // Wildcard route for unknown routes
   ],
 })
 
-
-// Docs: https://router.vuejs.org/guide/advanced/navigation-guards.html#global-before-guards
 export default router

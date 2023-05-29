@@ -1,6 +1,9 @@
 <template>
   <div>
-    <VCard class="mb-6" title="Action Manager">
+    <VCard
+      class="mb-6"
+      title="Agent Manager landing"
+    >
       <VCardText>Dash Board Selector Here.</VCardText>
       <VCardText> Please make sure to read our terms to understand where to go from here and how to use our template.</VCardText>
     </VCard>
