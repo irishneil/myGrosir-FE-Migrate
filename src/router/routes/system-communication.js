@@ -4,7 +4,7 @@ const systemCommunicationRoutes = [
     redirect: "communication/announcements",
     children: [
       {
-        path: "/announcements",
+        path: "announcements",
         name: "announcements",
         component: () => import("@/views/pages/system-communication/Annoucements.vue"),
         meta: {
@@ -18,7 +18,7 @@ const systemCommunicationRoutes = [
         },
       },
       {
-        path: "/whatsapp",
+        path: "whatsapp",
         name: "whatsapp",
         component: () => import("@/views/pages/system-communication/WhatsApp.vue"),
         meta: {
