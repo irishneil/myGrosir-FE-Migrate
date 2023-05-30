@@ -2,12 +2,12 @@ export default [
   {
     title: "Dashboard",
     to: 'Dashboard',
-    icon: { icon: "tabler-smart-home" },
+    icon: { icon: "tabler-home" },
   },
   { heading: "ADMINISTRATION" },
   {
     title: "Account Manager",
-    icon: { icon: "tabler-smart-home" },
+    icon: { icon: "tabler-users" },
     children: [
       { title: "Create Member", to: 'Create Member' },
       { title: "Members", to: 'View Members' },
@@ -16,7 +16,7 @@ export default [
   },
   {
     title: "Commission Manager",
-    icon: { icon: "tabler-file" },
+    icon: { icon: "tabler-currency-dollar" },
     children: [
       { title: "Rates Library", to: 'Rates Libary' },
       { title: "Default Rates", to: 'Default Rates' },
@@ -27,7 +27,7 @@ export default [
   { heading: "OPERATIONAL" },
   {
     title: "Catalogue",
-    icon: { icon: "tabler-smart-home" },
+    icon: { icon: "tabler-book" },
     children: [
       { title: "Shop", to: 'Catalogue' },
       { title: "Cart", to: 'Cart' },
@@ -35,7 +35,7 @@ export default [
   },
   {
     title: "Shop Manager",
-    icon: { icon: "tabler-file" },
+    icon: { icon: "tabler-building-store" },
     children: [
       { title: "Add Manage", to: 'SM AddManage' },
       { title: "Sales Manager", to: 'SM Actions' },
@@ -45,7 +45,7 @@ export default [
   },
   {
     title: "Media Center",
-    icon: { icon: "tabler-smart-home" },
+    icon: { icon: "tabler-photo" },
     children: [
       { title: "Gallery", to: 'Media Gallery' }, 
       { title: "Add New", to: 'Media Add' },
@@ -54,7 +54,7 @@ export default [
   { heading: "SYSTEM" },
   {
     title: "Master Data",
-    icon: { icon: "tabler-smart-home" },
+    icon: { icon: "tabler-database" },
     children: [
       { title: "Products", to: 'master_product_container' },
       { title: "Countries", to: 'master_country' },
@@ -65,7 +65,7 @@ export default [
   },
   {
     title: "Communication",
-    icon: { icon: "tabler-file" },
+    icon: { icon: "tabler-bell" },
     children: [
       { title: "Announcements", to: 'announcements' },
       { title: "Whatsapp", to: 'whatsapp' },
@@ -74,11 +74,11 @@ export default [
   {
     title: "System Accounts",
     to: 'system_accounts',
-    icon: { icon: "tabler-smart-home" },
+    icon: { icon: "tabler-user" },
   },
   {
     title: "Warehouse",
-    icon: { icon: "tabler-file" },
+    icon: { icon: "tabler-package" },
     children: [
       { title: "Manage", to: 'warehouse_manage' },
       { title: "Stock Manager", to: 'warehouse_stockmanager' },
@@ -87,7 +87,7 @@ export default [
   },
   {
     title: "Transactions",
-    icon: { icon: "tabler-file" },
+    icon: { icon: "tabler-file-text" },
     children: [
       { title: "Bonus Payments", to: 'Transation BonusPayments' },
       { title: "Contract Signings", to: 'Transactions ContractSignings' },
