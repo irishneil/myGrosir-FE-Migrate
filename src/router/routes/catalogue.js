@@ -1,22 +1,12 @@
 const catalogueRoutes = [
   {
     path: '/catalogue',
-    name: 'catalogue',
+    name: 'Catalogue',
     component: () => import('@/views/pages/catalogue/Catalogue.vue'),
-    meta: {
-      contentClass: 'ecommerce-application',
-      pageTitle: 'Catalogue',
-      breadcrumb: [
-        {
-          text: 'Catalogue',
-          active: true,
-        },
-      ],
-    },
     children: [
       {
         path: 'details/:productId',
-        name: 'product-details',
+        name: 'Product Details',
         component: () => import('@/views/pages/catalogue/ProductDetails.vue'),
         meta: {
           contentClass: 'ecommerce-application',
@@ -42,7 +32,7 @@ const catalogueRoutes = [
     children: [
       {
         path: '',
-        name: 'cart',
+        name: 'Cart',
         component: () => import('@/views/pages/catalogue/Cart.vue'),
         meta: {
           pageTitle: 'Cart',
@@ -61,7 +51,7 @@ const catalogueRoutes = [
       },
       {
         path: 'checkout',
-        name: 'checkout',
+        name: 'Checkout',
         component: () => import('@/views/pages/catalogue/Cart.vue'),
         meta: {
           pageTitle: 'Checkout',

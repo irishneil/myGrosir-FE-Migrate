@@ -5,7 +5,7 @@ const memberManagementRoutes = [
     children: [
       {
         path: "members",
-        name: "members",
+        name: "View Members",
         component: () => import("@/views/pages/member-manager/Members.vue"),
         meta: {
           pageTitle: "Member Management",

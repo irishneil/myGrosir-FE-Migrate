@@ -4,7 +4,7 @@ const systemTransactionRoutes = [
     children: [
       {
         path: "new-shops",
-        name: "new_shops",
+        name: "Tranaction NewShops",
         component: () => import("@/views/pages/system-transactions/NewShops.vue"),
         meta: {
           pageTitle: "New Shops",
@@ -22,7 +22,7 @@ const systemTransactionRoutes = [
       },
       {
         path: "bonus-payments",
-        name: "bonus_payments",
+        name: "Transation BonusPayments",
         component: () => import("@/views/pages/system-transactions/BonusPayments.vue"),
         meta: {
           pageTitle: "Bonus Payments",
@@ -40,7 +40,7 @@ const systemTransactionRoutes = [
       },
       {
         path: "contracts-signings",
-        name: "contracts_signings",
+        name: "Transactions ContractSignings",
         component: () =>
           import("@/views/pages/system-transactions/ContractSignings.vue"),
         meta: {
@@ -58,8 +58,8 @@ const systemTransactionRoutes = [
         },
       },
       {
-        path: "consign-checks",
-        name: "consign_checks",
+        path: "agent-checks",
+        name: "Transactions AgentChecks",
         component: () =>
           import("@/views/pages/system-transactions/ConsignmentChecks.vue"),
         meta: {
@@ -77,8 +77,8 @@ const systemTransactionRoutes = [
         },
       },
       {
-        path: "consign-sales",
-        name: "consign_sales",
+        path: "agent-sales",
+        name: "Transactions AgentSales",
         component: () =>
           import("@/views/pages/system-transactions/ConsignmentSales.vue"),
         meta: {
@@ -97,7 +97,7 @@ const systemTransactionRoutes = [
       },
       {
         path: "consign-payments",
-        name: "consign_payments",
+        name: "Transactions ConsignPayments",
         component: () =>
           import("@/views/pages/system-transactions/ConsignmentPayments.vue"),
         meta: {
@@ -115,8 +115,8 @@ const systemTransactionRoutes = [
         },
       },
       {
-        path: "consign-stock",
-        name: "consign_stock",
+        path: "agent-stock",
+        name: "Trasnactions AgentStock",
         component: () =>
           import("@/views/pages/system-transactions/ConsignmentStock.vue"),
         meta: {
@@ -135,7 +135,7 @@ const systemTransactionRoutes = [
       },
       {
         path: "late-actions",
-        name: "late_actions",
+        name: "Transactions LateActions",
         component: () =>
           import("@/views/pages/system-transactions/LateActions.vue"),
         meta: {
@@ -154,7 +154,7 @@ const systemTransactionRoutes = [
       },
       {
         path: "new-accounts",
-        name: "new_accounts",
+        name: "Transactions NewAccounts",
         component: () =>
           import("@/views/pages/system-transactions/NewAccounts.vue"),
         meta: {

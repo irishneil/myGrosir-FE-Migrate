@@ -1,156 +1,73 @@
 const commissionManagerRoutes = [
   {
-    path: "/rates_libary",
-    name: "rates libary",
-    component: () => import("@/views/pages/commission-manager/RatesLibary.vue"),
-    meta: {
-      pageTitle: "Rates Libary",
-      breadcrumb: [
-        {
-          text: "Rates Libary",
-          active: true,
-        },
-      ],
-    },
-  },
-  {
-    path: "/default_rates",
-    name: "default rates",
-    component: () =>
-      import("@/views/pages/commission-manager/DefaultRates.vue"),
-    meta: {
-      pageTitle: "Default Rates",
-      breadcrumb: [
-        {
-          text: "Default Rates",
-          active: true,
-        },
-      ],
-    },
-  },
-  {
-    path: "/agent_manager",
-    name: "agent manager",
-    component: () => import("@/views/pages/commission-manager/AgentManager.vue"),
+    path: "/commission",
+    redirect: "/commission/agent_manager",
     children: [
       {
-        path: "late_actions",
-        alias: "/",
-        name: "late actions",
-        component: () =>import("@/views/pages/commission-manager/agent-manager/LateActions.vue"),
-        meta: {
-          contentClass: "ecommerce-application",
-          pageTitle: "Agent Manager",
-          breadcrumb: [
-            {
-              text: "Agent Manager",
-              active: true,
-            },
-          ],
-        },
+        path: "rates_libary",
+        name: "Rates Libary",
+        component: () => import("@/views/pages/commission-manager/RatesLibary.vue"),
       },
       {
-        path: "agents",
-        alias: "/",
-        name: "agents",
-        component: () => import("@/views/pages/commission-manager/agent-manager/Agents.vue"),
-        meta: {
-          contentClass: "ecommerce-application",
-          pageTitle: "Agent Manager",
-          breadcrumb: [
-            {
-              text: "Agent Manager",
-              active: true,
-            },
-          ],
-        },
+        path: "default_rates",
+        name: "Default Rates",
+        component: () => import("@/views/pages/commission-manager/DefaultRates.vue"),
       },
       {
-        path: "shops",
-        alias: "/",
-        name: "shops",
-        component: () =>import("@/views/pages/commission-manager/agent-manager/Shops.vue"),
-        meta: {
-          contentClass: "ecommerce-application",
-          pageTitle: "Agent Manager",
-          breadcrumb: [
-            {
-              text: "Agent Manager",
-              active: true,
-            },
-          ],
-        },
-      },
-    ],
-  },
-  {
-    path: "/payments",
-    name: "payments",
-    component: () => import("@/views/pages/commission-manager/Payments.vue"),
-    children: [
-      {
-        path: "commissions",
-        alias: "/",
-        name: "commissions",
-        component: () => import("@/views/pages/commission-manager/payments/Commissions.vue"),
-        meta: {
-          contentClass: "ecommerce-application",
-          pageTitle: "Commissions Payments",
-          breadcrumb: [
-            {
-              text: "Commission",
-              active: true,
-            },
-          ],
-        },
+        path: "agent_manager",
+        name: "Agent Manager",
+        component: () => import("@/views/pages/commission-manager/AgentManager.vue"),
+        children: [
+          {
+            path: "late_actions",
+            alias: "",
+            name: "AM Late Actions",
+            component: () => import("@/views/pages/commission-manager/agent-manager/LateActions.vue"),
+          },
+          {
+            path: "agents",
+            alias: "",
+            name: "AM Agents",
+            component: () => import("@/views/pages/commission-manager/agent-manager/Agents.vue"),
+          },
+          {
+            path: "shops",
+            alias: "",
+            name: "AM Shops",
+            component: () => import("@/views/pages/commission-manager/agent-manager/Shops.vue"),
+          },
+        ],
       },
       {
-        path: "agentpurchases",
-        alias: "/",
-        name: "agent transactions",
-        component: () => import("@/views/pages/commission-manager/payments/AgentPurchases.vue"),
-        meta: {
-          contentClass: "ecommerce-application",
-          pageTitle: "Commissions Payments",
-          breadcrumb: [
-            {
-              text: "Commission",
-              active: true,
-            },
-          ],
-        },
-      },
-      {
-        path: "transactionhistory",
-        alias: "/",
-        name: "transaction history",
-        component: () => import("@/views/pages/commission-manager/payments/TransactionHistory.vue"),
-        meta: {
-          contentClass: "ecommerce-application",
-          pageTitle: "Commissions Payments",
-          breadcrumb: [
-            {
-              text: "Commission",
-              active: true,
-            },
-          ],
-        },
-      },
-      {
-        path: "admin",
-        alias: "/",
-        name: "admin",
-        component: () => import("@/views/pages/commission-manager/payments/Admin.vue"),
-        meta: {
-          contentClass: "ecommerce-application",
-          pageTitle: "Commissions Payments",
-          breadcrumb: [
-            {
-              text: "Commission",
-              active: true,
-            },
-          ],
-        },
+        path: "payments",
+        name: "Commission Payments",
+        component: () => import("@/views/pages/commission-manager/Payments.vue"),
+        children: [
+          {
+            path: "commissions",
+            alias: "",
+            name: "CP Comissions",
+            component: () => import("@/views/pages/commission-manager/payments/Commissions.vue"),
+          },
+          {
+            path: "agentpurchases",
+            alias: "",
+            name: "CP AgentPurchase",
+            component: () => import("@/views/pages/commission-manager/payments/AgentPurchases.vue"),
+          },
+          {
+            path: "transactionhistory",
+            alias: "",
+            name: "CP TransactionHistory",
+            component: () => import("@/views/pages/commission-manager/payments/TransactionHistory.vue"),
+          },
+          {
+            path: "admin",
+            alias: "",
+            name: "CP Admin",
+            component: () => import("@/views/pages/commission-manager/payments/Admin.vue"),
+          },
+        ],
       },
     ],
   },

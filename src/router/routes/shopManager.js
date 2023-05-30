@@ -3,14 +3,13 @@ const shopManagerRoutes = [
     // SALES MANAGER
 
     path: "/sales-manager",
-    name: "sales_manager",
-    component: () =>
-      import("@/views/pages/shop-manager/sales-manager/Index.vue"),
+    name: "Sales Manager",
+    redirect: "sales-manager/actions",
     children: [
       {
         alias: "/",
         path: "actions",
-        name: "actions_manager",
+        name: "SM Actions",
         component: () =>
           import("@/views/pages/shop-manager/sales-manager/Actions.vue"),
         meta: {
@@ -26,7 +25,7 @@ const shopManagerRoutes = [
       },
       {
         path: "payments",
-        name: "sales_manager_payments",
+        name: "SM Payments",
         component: () =>
           import("@/views/pages/shop-manager/sales-manager/Payments.vue"),
         meta: {
@@ -42,7 +41,7 @@ const shopManagerRoutes = [
       },
       {
         path: "my-stock",
-        name: "sales_manager_mystock",
+        name: "SM MyStock",
         component: () =>
           import("@/views/pages/shop-manager/sales-manager/MyStock.vue"),
         meta: {
@@ -62,14 +61,13 @@ const shopManagerRoutes = [
     // ADD MANAGE
 
     path: "/shop-manager",
-    name: "shop_manager",
-    component: () =>
-      import("@/views/pages/shop-manager/add-manage/AddManage.vue"),
+    name: "Shop Manager",
+    redirect: '/shop-manager/addmanage',
     children: [
       {
-        path: "add-mange",
+        path: "addmange",
         alias: "/",
-        name: "shop_manager",
+        name: "SM AddManage",
         component: () =>
           import("@/views/pages/shop-manager/add-manage/AddManage.vue"),
         meta: {
@@ -84,7 +82,7 @@ const shopManagerRoutes = [
       },
       {
         path: "create",
-        name: "create_shop",
+        name: "SM CreateShop",
         component: () =>
           import("@/views/pages/shop-manager/add-manage/AddShop.vue"),
         meta: {
@@ -201,13 +199,12 @@ const shopManagerRoutes = [
     // CONSIGNMENT
 
     path: "/consignment",
-    name: "",
-    component: () => import("@/views/pages/shop-manager/consignment/Index.vue"),
+    redirect: "/consignment/request",
     children: [
       {
         path: "request",
         alias: "/",
-        name: "consignment_request",
+        name: "Consignment Request",
         component: () =>
           import("@/views/pages/shop-manager/consignment/Request.vue"),
         meta: {
@@ -223,7 +220,7 @@ const shopManagerRoutes = [
       {
         path: "offer",
         alias: "/",
-        name: "consignmnet_offer",
+        name: "Consignment Offer",
         component: () =>
           import("@/views/pages/shop-manager/consignment/Offer.vue"),
         meta: {
@@ -239,7 +236,7 @@ const shopManagerRoutes = [
       {
         path: "open",
         alias: "/",
-        name: "consignment_open",
+        name: "Consignment Open",
         component: () =>
           import("@/views/pages/shop-manager/consignment/Open.vue"),
         meta: {
@@ -255,7 +252,7 @@ const shopManagerRoutes = [
       {
         path: "completed",
         alias: "/",
-        name: "consignment_completed",
+        name: "Consignment Completed",
         component: () =>
           import("@/views/pages/shop-manager/consignment/Completed.vue"),
         meta: {
@@ -274,7 +271,7 @@ const shopManagerRoutes = [
     // CREDIT SCORE
 
     path: "/credit-score",
-    name: "credit_score",
+    name: "SM CreditScore",
     component: () =>
       import("@/views/pages/shop-manager/credit-score/CreditScore.vue"),
     meta: {

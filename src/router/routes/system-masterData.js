@@ -3,7 +3,7 @@ const systemMasterDataRoutes = [
   {
     //MASTER PRODUCT
 
-    path: "/product",
+    path: "/masterdata/product",
     name: "master_product_container",
     component: () => import("@/views/pages/system-master-settings/master-product/IndexContainer.vue"),
     children: [
@@ -70,7 +70,7 @@ const systemMasterDataRoutes = [
   // MASTER COUNTRY
 
   {
-    path: "/mastercountry",
+    path: "/masterdata/mastercountry",
     name: "master_country",
     component: () => import("@/views/pages/system-master-settings/master-country/MasterCountry.vue"),
     meta: {
@@ -87,7 +87,7 @@ const systemMasterDataRoutes = [
   // MASTER CONTRACTS
 
   {
-    path: "/mastercontracts",
+    path: "/masterdata/mastercontracts",
     name: "master_contracts",
     component: () => import("@/views/pages/system-master-settings/master-contract/MasterContracts.vue"),
     meta: {
@@ -104,7 +104,7 @@ const systemMasterDataRoutes = [
   // MASTER ACCOUNT TYPES & PERMISSIONS
 
   {
-    path: "/maser-roles",
+    path: "/masterdata/maser-roles",
     name: "master_roles_container",
     component: () => import("@/views/pages/system-master-settings/master-roles/IndexContainer.vue"),
     meta: {
@@ -118,10 +118,9 @@ const systemMasterDataRoutes = [
     },
     children: [
       {
-        alias: "/",
         path: "roles",
         name: "master_roles",
-        component:  () => import("@/views/pages/system-master-settings/master-roles/Roles.vue"),
+        component: () => import("@/views/pages/system-master-settings/master-roles/Roles.vue"),
         meta: {
           contentClass: "ecommerce-application",
           pageTitle: "Master Roles",
@@ -134,7 +133,6 @@ const systemMasterDataRoutes = [
         },
       },
       {
-        alias: "/",
         path: "permissions",
         name: "master_permissions",
         component: () => import("@/views/pages/system-master-settings/master-roles/Roles.vue"),
@@ -155,8 +153,8 @@ const systemMasterDataRoutes = [
   // DEFAULT VARIABLES
 
   {
-    path: "/variables",
-    name: "variables",
+    path: "/masterdata/variables",
+    name: "defaultvariables",
     component: () => import("@/views/pages/system-master-settings/master-defaults/DefaultVariables.vue"),
     meta: {
       pageTitle: "Default Variables",

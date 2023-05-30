@@ -1,5 +1,10 @@
 const authRoutes = [
   {
+    path: '/login',
+    name: '',
+    redirect: '/auth/login',
+  },
+  {
     path: '/auth',
     name: 'auth',
     redirect: '/auth/login',
@@ -9,19 +14,20 @@ const authRoutes = [
         name: 'Login',
         component: () => import('@/views/pages/authentication/Login.vue'),
         meta: {
-          layout: 'full',
+          layout: "full",
+        },
+      },
+      {
+        path: 'reset-password',
+        name: 'reset-password',
+        component: () => import('@/views/pages/authentication/PasswordReset.vue'),
+        meta: {
+          layout: "full",
         },
       },
     ],
   },
-  {
-    path: '/reset-password',
-    name: 'reset-password',
-    component: () => import('@/views/pages/authentication/PasswordReset.vue'),
-    meta: {
-      layout: 'full',
-    },
-  },
+  
 ]
 
 export default authRoutes
