@@ -1,5 +1,5 @@
 <template>
-  <VCard class="mb-7 pa-2">
+  <VCard class="mb-6 pa-2">
     <VTabs
       v-model="userTab"
       class="v-tabs-pill"
@@ -18,7 +18,9 @@
       </VTab>
     </VTabs>
   </VCard>
-  <RouterView />
+  <Transition>
+    <RouterView class="productsrouter" />
+  </Transition>
 </template>
 
 <script setup>
