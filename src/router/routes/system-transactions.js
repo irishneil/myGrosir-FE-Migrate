@@ -162,6 +162,7 @@ const systemTransactionRoutes = [
           breadcrumb: [
             {
               text: "Transactions",
+              to: "/",
               active: false,
             },
             {

@@ -56,7 +56,7 @@ export default [
     title: "Master Data",
     icon: { icon: "tabler-database" },
     children: [
-      { title: "Products", to: 'master_product_container' },
+      { title: "Products", to: 'master_industry' },
       { title: "Countries", to: 'master_country' },
       { title: "Contracts", to: 'master_contracts' },
       { title: "Roles & Permissions", to: 'master_roles_container' },

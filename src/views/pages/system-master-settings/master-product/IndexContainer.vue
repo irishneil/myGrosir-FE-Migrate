@@ -1,8 +1,53 @@
 <template>
-  <div>
-    <VCard class="mb-6" title="Master Product Container">
-      <VCardText>Select Category</VCardText>
-      <VCardText> Please make sure to read our terms to understand where to go from here and how to use our template.</VCardText>
-    </VCard>
-  </div>
+  <VCard class="mb-7 pa-2">
+    <VTabs
+      v-model="userTab"
+      class="v-tabs-pill"
+    >
+      <VTab
+        v-for="tab in tabs"
+        :key="tab.icon"
+        :to="tab.to"
+      >
+        <VIcon
+          :size="18"
+          :icon="tab.icon"
+          class="me-1"
+        />
+        <span>{{ tab.title }}</span>
+      </VTab>
+    </VTabs>
+  </VCard>
+  <RouterView />
 </template>
+
+<script setup>
+import { ref } from 'vue'
+import { useRoute } from 'vue-router'
+
+const userTab = ref(null)
+const route = useRoute()
+
+const tabs = [
+  {
+    icon: 'tabler-user-check',
+    title: 'Industry',
+    to: { name: 'master_industry' },
+  },
+  {
+    icon: 'tabler-lock',
+    title: 'Brand',
+    to: { name: 'master_brand' },
+  },
+  {
+    icon: 'tabler-currency-dollar',
+    title: 'Product',
+    to: { name: 'master_product' },
+  },
+  {
+    icon: 'tabler-bell',
+    title: 'UoM',
+    to: { name: 'master_uom' },
+  },
+]
+</script>

@@ -6,11 +6,20 @@ const systemMasterDataRoutes = [
     path: "/masterdata/product",
     name: "master_product_container",
     component: () => import("@/views/pages/system-master-settings/master-product/IndexContainer.vue"),
+    meta: {
+      pageTitle: "Master Industry Container",
+      breadcrumb: [
+        {
+          text: "Master Industry",
+          active: true,
+        },
+      ],
+    },
     children: [
       {
         alias: "/",
-        path: "/industry",
-        name: "industry",
+        path: "industry",
+        name: "master_industry",
         component: () => import("@/views/pages/system-master-settings/master-product/Industry.vue"),
         meta: {
           pageTitle: "Master Industry",
@@ -23,7 +32,7 @@ const systemMasterDataRoutes = [
         },
       },
       {
-        path: "/brand",
+        path: "brand",
         name: "master_brand",
         component: () => import("@/views/pages/system-master-settings/master-product/Brand.vue"),
         meta: {
@@ -37,7 +46,7 @@ const systemMasterDataRoutes = [
         },
       },
       {
-        path: "/product",
+        path: "product",
         name: "master_product",
         component: () => import("@/views/pages/system-master-settings/master-product/Product.vue"),
         meta: {
@@ -51,7 +60,7 @@ const systemMasterDataRoutes = [
         },
       },
       {
-        path: "/uom",
+        path: "uom",
         name: "master_uom",
         component: () => import("@/views/pages/system-master-settings/master-product/UoM.vue"),
         meta: {

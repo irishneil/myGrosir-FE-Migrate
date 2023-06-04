@@ -10,6 +10,7 @@ import NavBarNotifications from '@/layouts/components/NavBarNotifications.vue'
 import NavbarShortcuts from '@/layouts/components/NavbarShortcuts.vue'
 import NavbarThemeSwitcher from '@/layouts/components/NavbarThemeSwitcher.vue'
 import UserProfile from '@/layouts/components/UserProfile.vue'
+import AppBreadcrum from './AppBreadcrum.vue'
 
 // @layouts plugin
 import { VerticalNavLayout } from '@layouts'
@@ -42,8 +43,9 @@ const { width: windowWidth } = useWindowSize()
         <UserProfile />
       </div>
     </template>
-
+  
     <!-- 👉 Pages -->
+    <AppBreadcrum />
     <RouterView v-slot="{ Component }">
       <Transition
         :name="appRouteTransition"

@@ -35,6 +35,7 @@ const catalogueRoutes = [
         name: 'Cart',
         component: () => import('@/views/pages/catalogue/Cart.vue'),
         meta: {
+          icon: 'tabler-users',
           pageTitle: 'Cart',
           breadcrumb: [
             {
