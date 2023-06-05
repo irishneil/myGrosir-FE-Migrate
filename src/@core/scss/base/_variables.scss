@@ -13,7 +13,7 @@
 
 @forward "@layouts/styles/variables" with (
   // Adjust z-index so vertical nav & overlay stays on top of v-layout in v-main. E.g. Email app
-  $layout-vertical-nav-z-index: 1004,
+  $layout-vertical-nav-z-index: 1604,
   $layout-overlay-z-index: 1003,
 );
 @use "@layouts/styles/variables" as *;
