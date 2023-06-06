@@ -23,9 +23,14 @@ const systemMasterDataRoutes = [
         component: () => import("@/views/pages/system-master-settings/master-product/Industry.vue"),
         meta: {
           pageTitle: "Master Industry",
+          icon: 'tabler-building-factory-2',
           breadcrumb: [
             {
-              text: "Master Industry",
+              text: "Master Product",
+              active: true,
+            },
+            {
+              text: "Industry",
               active: true,
             },
           ],
@@ -37,9 +42,14 @@ const systemMasterDataRoutes = [
         component: () => import("@/views/pages/system-master-settings/master-product/Brand.vue"),
         meta: {
           pageTitle: "Master Brand",
+          icon: 'tabler-badge-tm',
           breadcrumb: [
             {
-              text: "Master Brand",
+              text: "Master Product",
+              active: true,
+            },
+            {
+              text: "Brand",
               active: true,
             },
           ],
@@ -51,9 +61,14 @@ const systemMasterDataRoutes = [
         component: () => import("@/views/pages/system-master-settings/master-product/Product.vue"),
         meta: {
           pageTitle: "Master Product",
+          icon: 'tabler-flask',
           breadcrumb: [
             {
               text: "Master Product",
+              active: true,
+            },
+            {
+              text: "Product",
               active: true,
             },
           ],
@@ -65,7 +80,12 @@ const systemMasterDataRoutes = [
         component: () => import("@/views/pages/system-master-settings/master-product/UoM.vue"),
         meta: {
           pageTitle: "Product",
+          icon: 'tabler-package',
           breadcrumb: [
+            {
+              text: "Master Product",
+              active: true,
+            },
             {
               text: "Units of Measurement",
               active: true,
@@ -84,9 +104,14 @@ const systemMasterDataRoutes = [
     component: () => import("@/views/pages/system-master-settings/master-country/MasterCountry.vue"),
     meta: {
       pageTitle: "Master Country",
+      icon: 'tabler-world-check',
       breadcrumb: [
         {
-          text: "Master Country",
+          text: "Master Data",
+          active: true,
+        },
+        {
+          text: "Country",
           active: true,
         },
       ],
@@ -101,9 +126,14 @@ const systemMasterDataRoutes = [
     component: () => import("@/views/pages/system-master-settings/master-contract/MasterContracts.vue"),
     meta: {
       pageTitle: "Master Contracts",
+      icon: 'tabler-license',
       breadcrumb: [
         {
-          text: "Master Contracts",
+          text: "Master Data",
+          active: true,
+        },
+        {
+          text: "Contracts",
           active: true,
         },
       ],
@@ -113,29 +143,25 @@ const systemMasterDataRoutes = [
   // MASTER ACCOUNT TYPES & PERMISSIONS
 
   {
-    path: "/masterdata/maser-roles",
+    path: "/masterdata/master-roles",
     name: "master_roles_container",
     component: () => import("@/views/pages/system-master-settings/master-roles/IndexContainer.vue"),
-    meta: {
-      pageTitle: "Master Roles",
-      breadcrumb: [
-        {
-          text: "Master Roles",
-          active: true,
-        },
-      ],
-    },
     children: [
       {
         path: "roles",
-        name: "master_roles",
+        name: "Master Roles",
         component: () => import("@/views/pages/system-master-settings/master-roles/Roles.vue"),
         meta: {
           contentClass: "ecommerce-application",
           pageTitle: "Master Roles",
+          icon: 'tabler-user-plus',
           breadcrumb: [
             {
-              text: "Master Roles",
+              text: "Master Data",
+              active: true,
+            },
+            {
+              text: "Roles",
               active: true,
             },
           ],
@@ -143,14 +169,19 @@ const systemMasterDataRoutes = [
       },
       {
         path: "permissions",
-        name: "master_permissions",
+        name: "Master Permissions",
         component: () => import("@/views/pages/system-master-settings/master-roles/Roles.vue"),
         meta: {
           contentClass: "ecommerce-application",
-          pageTitle: "Role Permissions",
+          pageTitle: "Master Permissions",
+          icon: 'tabler-lock',
           breadcrumb: [
             {
-              text: "Role Permissions",
+              text: "Master Data",
+              active: true,
+            },
+            {
+              text: "Permissions",
               active: true,
             },
           ],
@@ -167,9 +198,14 @@ const systemMasterDataRoutes = [
     component: () => import("@/views/pages/system-master-settings/master-defaults/DefaultVariables.vue"),
     meta: {
       pageTitle: "Default Variables",
+      icon: 'tabler-adjustments-alt',
       breadcrumb: [
         {
-          text: "Default Variables",
+          text: "Master Data",
+          active: true,
+        },
+        {
+          text: "Variables",
           active: true,
         },
       ],

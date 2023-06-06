@@ -5,11 +5,10 @@
   >
     <!-- Content Left -->
     <span class="content-div d-flex flex-row align-center mt-n3">
-      <span class="hidden-sm-and-down mt-n1">
+      <span v-if="iconName">
         <VIcon
           left
           size="large"
-          :class="iconClass"
         >{{ iconName }}</VIcon>
       </span>
       <span class="my-2 pl-1">
@@ -44,7 +43,9 @@ const route = useRoute()
 
 const pageTitle = computed(() => route.meta.pageTitle)
 const breadcrumb = computed(() => route.meta.breadcrumb)
-const iconName = ref('iconify:mdi-account')
+const iconName = computed(() => route.meta.icon)
+
+// const iconName = ref('mdi-account')
 </script>
 
 <style scoped>

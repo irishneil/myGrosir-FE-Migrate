@@ -1,7 +1,6 @@
 <template>
   <div>
     <TabComponent
-      :user-tab="userTab"
       :drawer-title="drawerTitle"
       :tabs="tabs"
     >
@@ -15,31 +14,30 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
 import { RouterView } from 'vue-router'
 import TabComponent from '../../../components/general/TabComponent.vue'
 
-const userTab = ref(null)
+
 const drawerTitle = 'Master Product'
 
 const tabs = [
   {
-    icon: 'tabler-user-check',
+    icon: 'tabler-building-factory-2',
     title: 'Industry',
     to: { name: 'master_industry' },
   },
   {
-    icon: 'tabler-lock',
+    icon: 'tabler-badge-tm',
     title: 'Brand',
     to: { name: 'master_brand' },
   },
   {
-    icon: 'tabler-currency-dollar',
+    icon: 'tabler-flask',
     title: 'Product',
     to: { name: 'master_product' },
   },
   {
-    icon: 'tabler-bell',
+    icon: 'tabler-package',
     title: 'UoM',
     to: { name: 'master_uom' },
   },

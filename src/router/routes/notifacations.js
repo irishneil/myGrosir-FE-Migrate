@@ -5,6 +5,7 @@ const notifacationRoutes = [
     component: () => import("@/views/pages/notifications/Notifications.vue"),
     meta: {
       pageTitle: "Notifacation Feed",
+      icon: 'tabler-bell-plus',
       breadcrumb: [
         {
           text: "Notifcation Feed",

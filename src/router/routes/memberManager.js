@@ -9,6 +9,7 @@ const memberManagementRoutes = [
         component: () => import("@/views/pages/member-manager/Members.vue"),
         meta: {
           pageTitle: "Member Management",
+          icon: 'tabler-users',
           breadcrumb: [
             {
               text: "Member Management",
@@ -23,6 +24,7 @@ const memberManagementRoutes = [
         component: () => import("@/views/pages/member-manager/CreateMember.vue"),
         meta: {
           pageTitle: "Member Management",
+          icon: 'tabler-user-plus',
           breadcrumb: [
             {
               text: "Create Member",
@@ -37,6 +39,7 @@ const memberManagementRoutes = [
         component: () => import("@/views/pages/member-manager/Geoplotter.vue"),
         meta: {
           pageTitle: "Geoplotter",
+          icon: 'tabler-brand-google-maps',
           breadcrumb: [
             {
               text: "Geoplotter",

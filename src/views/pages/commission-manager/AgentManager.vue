@@ -1,16 +1,46 @@
 <template>
   <div>
-    <VCard
-      class="mb-6"
-      title="Agent Manager landing"
+    <TabComponent
+      :drawer-title="drawerTitle"
+      :tabs="tabs"
     >
-      <VCardText>Dash Board Selector Here.</VCardText>
-      <VCardText> Please make sure to read our terms to understand where to go from here and how to use our template.</VCardText>
-    </VCard>
-
-    <VCard title="What is Lorem Ipsum?">
-      <VCardText>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </VCardText>
-      <VCardText>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</VCardText>
-    </VCard>
+      <template #default>
+        <div class="productsrouter">
+          <RouterView />
+        </div>
+      </template>
+    </TabComponent>
   </div>
 </template>
+
+<script setup>
+import { RouterView } from 'vue-router'
+import TabComponent from '../../components/general/TabComponent.vue'
+
+
+const drawerTitle = 'Master Product'
+
+const tabs = [
+  {
+    icon: 'tabler-zoom-exclamation',
+    title: 'Late Actions',
+    to: { name: 'AM Late Actions' },
+  },
+  {
+    icon: 'tabler-users-group',
+    title: 'Agents',
+    to: { name: 'AM Agents' },
+  },
+  {
+    icon: 'tabler-building-store',
+    title: 'Shops',
+    to: { name: 'AM Shops' },
+  },
+]
+</script>
+
+<style scoped>
+.productsrouter {
+  margin-block-start: 20px;
+}
+</style>

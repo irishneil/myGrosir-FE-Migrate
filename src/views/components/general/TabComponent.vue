@@ -28,27 +28,23 @@
               :key="tab.icon"
             >
               <VListItem :to="tab.to">
-                <VListItemIcon>
-                  <VIcon
-                    :size="20"
-                    class="mb-2"
-                  >
-                    {{ tab.icon }}
-                  </VIcon>
-                </VListItemIcon>
-                <VListItemContent>
-                  <button
-                    class="drawer-button"
-                    @click="navigateTo(tab.to)"
-                  >
-                    <section class="d-flex align-center pa-2">
-                      <span
-                        class="me-1"
-                        style="font-size: 18px;"
-                      >{{ tab.title }}</span>
-                    </section>
-                  </button>
-                </VListItemContent>
+                <VIcon
+                  :size="20"
+                  class="mb-2"
+                >
+                  {{ tab.icon }}
+                </VIcon>
+                <button
+                  class="drawer-button"
+                  @click="navigateTo(tab.to)"
+                >
+                  <section class="d-flex align-center pa-2">
+                    <span
+                      class="me-1"
+                      style="font-size: 18px;"
+                    >{{ tab.title }}</span>
+                  </section>
+                </button>
               </VListItem>
             </template>
           </VNavigationDrawer>
@@ -90,10 +86,6 @@ import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 
 const props = defineProps({
-  userTab: {
-    type: Object,
-    required: true,
-  },
   drawerTitle: {
     type: String,
     default: 'Default Title',

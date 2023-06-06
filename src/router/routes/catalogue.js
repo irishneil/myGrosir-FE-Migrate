@@ -11,6 +11,7 @@ const catalogueRoutes = [
         meta: {
           contentClass: 'ecommerce-application',
           pageTitle: 'Product Details',
+          icon: 'tabler-book',
           breadcrumb: [
             {
               text: 'Catalogue',
@@ -35,7 +36,7 @@ const catalogueRoutes = [
         name: 'Cart',
         component: () => import('@/views/pages/catalogue/Cart.vue'),
         meta: {
-          icon: 'tabler-users',
+          icon: 'tabler-shopping-cart',
           pageTitle: 'Cart',
           breadcrumb: [
             {
@@ -56,6 +57,7 @@ const catalogueRoutes = [
         component: () => import('@/views/pages/catalogue/Cart.vue'),
         meta: {
           pageTitle: 'Checkout',
+          icon: 'tabler-shopping-cart',
           breadcrumb: [
             {
               text: 'Catalogue',

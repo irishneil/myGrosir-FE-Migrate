@@ -17,23 +17,28 @@
 import { RouterView } from 'vue-router'
 import TabComponent from '../../../components/general/TabComponent.vue'
 
-const drawerTitle = 'Sales Manager'
+const drawerTitle = 'Consignment'
 
 const tabs = [
   {
     icon: 'tabler-building-bank',
-    title: 'Actions',
+    title: 'Requests',
     to: { name: 'Consignment Request' },
   },
   {
     icon: 'tabler-receipt-refund',
-    title: 'Payments',
+    title: 'Offers',
     to: { name: 'Consignment Offer' },
   },
   {
     icon: 'tabler-file-invoice',
-    title: 'My Stock',
+    title: 'Open',
     to: { name: 'Consignment Open' },
+  },
+  {
+    icon: 'tabler-certificate',
+    title: 'Completed',
+    to: { name: 'Consignment Completed' },
   },
 ]
 </script>

@@ -1,8 +1,41 @@
 <template>
   <div>
-    <VCard class="mb-6" title="Account Types & Permissions Container">
-      <VCardText> Create Account Type and Edit Permissions</VCardText>
-      <VCardText> Please make sure to read our terms to understand where to go from here and how to use our template.</VCardText>
-    </VCard>
+    <TabComponent
+      :drawer-title="drawerTitle"
+      :tabs="tabs"
+    >
+      <template #default>
+        <div class="productsrouter">
+          <RouterView />
+        </div>
+      </template>
+    </TabComponent>
   </div>
 </template>
+
+<script setup>
+import { RouterView } from 'vue-router'
+import TabComponent from '../../../components/general/TabComponent.vue'
+
+
+const drawerTitle = 'Roles & Permissions'
+
+const tabs = [
+  {
+    icon: 'tabler-user-plus',
+    title: 'Roles',
+    to: { name: 'Master Roles' },
+  },
+  {
+    icon: 'tabler-lock',
+    title: 'Permissions',
+    to: { name: 'Master Permissions' },
+  },
+]
+</script>
+
+<style scoped>
+.productsrouter {
+  margin-block-start: 20px;
+}
+</style>

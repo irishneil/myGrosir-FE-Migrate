@@ -4,6 +4,8 @@ const shopManagerRoutes = [
 
     path: "/sales-manager",
     name: "Sales Manager",
+    component: () =>
+      import("@/views/pages/shop-manager/sales-manager/Index.vue"),
     redirect: "sales-manager/actions",
     children: [
       {
@@ -15,6 +17,7 @@ const shopManagerRoutes = [
         meta: {
           contentClass: "ecommerce-application",
           pageTitle: "Actions Manager",
+          icon: 'tabler-alert-circle',
           breadcrumb: [
             {
               text: "Actions Manager",
@@ -31,6 +34,7 @@ const shopManagerRoutes = [
         meta: {
           contentClass: "ecommerce-application",
           pageTitle: "Sales Manager",
+          icon: 'tabler-cash',
           breadcrumb: [
             {
               text: "Payments",
@@ -47,6 +51,7 @@ const shopManagerRoutes = [
         meta: {
           contentClass: "ecommerce-application",
           pageTitle: "Sales Manager",
+          icon: 'tabler-packages',
           breadcrumb: [
             {
               text: "My Stock",
@@ -72,6 +77,7 @@ const shopManagerRoutes = [
           import("@/views/pages/shop-manager/add-manage/AddManage.vue"),
         meta: {
           pageTitle: "Shop Manager",
+          icon: 'tabler-building-store',
           breadcrumb: [
             {
               text: "Manage",
@@ -87,6 +93,7 @@ const shopManagerRoutes = [
           import("@/views/pages/shop-manager/add-manage/AddShop.vue"),
         meta: {
           pageTitle: "Shop Manager",
+          icon: 'tabler-building-store',
           breadcrumb: [
             {
               text: "Manage",
@@ -122,6 +129,7 @@ const shopManagerRoutes = [
           import("@/views/pages/shop-manager/add-manage/ShopDetails.vue"),
         meta: {
           pageTitle: "Detail Shop",
+          icon: 'tabler-building-store',
           breadcrumb: [
             {
               text: "Manage",
@@ -200,6 +208,8 @@ const shopManagerRoutes = [
 
     path: "/consignment",
     redirect: "/consignment/request",
+    component: () =>
+      import("@/views/pages/shop-manager/consignment/IndexContainer.vue"),
     children: [
       {
         path: "request",
@@ -208,7 +218,8 @@ const shopManagerRoutes = [
         component: () =>
           import("@/views/pages/shop-manager/consignment/Request.vue"),
         meta: {
-          pageTitle: "Consignment",
+          pageTitle: "Requests",
+          icon: 'tabler-building-bank',
           breadcrumb: [
             {
               text: "Request",
@@ -224,7 +235,8 @@ const shopManagerRoutes = [
         component: () =>
           import("@/views/pages/shop-manager/consignment/Offer.vue"),
         meta: {
-          pageTitle: "Consignment Offer",
+          pageTitle: "Offers",
+          icon: 'tabler-receipt-refund',
           breadcrumb: [
             {
               text: "Consignment Offer",
@@ -240,7 +252,8 @@ const shopManagerRoutes = [
         component: () =>
           import("@/views/pages/shop-manager/consignment/Open.vue"),
         meta: {
-          pageTitle: "Consignment Open",
+          pageTitle: "Open",
+          icon: 'tabler-file-invoice',
           breadcrumb: [
             {
               text: "Consignment Open",
@@ -256,7 +269,8 @@ const shopManagerRoutes = [
         component: () =>
           import("@/views/pages/shop-manager/consignment/Completed.vue"),
         meta: {
-          pageTitle: "Consignment",
+          pageTitle: "Completed",
+          icon: 'tabler-certificate',
           breadcrumb: [
             {
               text: "Completed",
@@ -277,6 +291,7 @@ const shopManagerRoutes = [
     meta: {
       contentClass: "ecommerce-application",
       pageTitle: "Credit Score",
+      icon: "tabler-star",
       breadcrumb: [
         {
           text: "Credit Score",
