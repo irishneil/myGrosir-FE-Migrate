@@ -32,6 +32,12 @@ const tabs = [
     to: { name: 'Master Permissions' },
   },
 ]
+
+const route = useRoute()
+
+const isActiveRoute = routeName => {
+  return route.matched.some(record => record.name === routeName)
+}
 </script>
 
 <style scoped>

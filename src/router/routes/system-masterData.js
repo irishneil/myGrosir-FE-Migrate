@@ -170,7 +170,7 @@ const systemMasterDataRoutes = [
       {
         path: "permissions",
         name: "Master Permissions",
-        component: () => import("@/views/pages/system-master-settings/master-roles/Roles.vue"),
+        component: () => import("@/views/pages/system-master-settings/master-roles/Permissions.vue"),
         meta: {
           contentClass: "ecommerce-application",
           pageTitle: "Master Permissions",

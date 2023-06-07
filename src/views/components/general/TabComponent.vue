@@ -25,7 +25,7 @@
             </VCardTitle>
             <template
               v-for="tab in tabs"
-              :key="tab.icon"
+              :key="tab.title"
             >
               <VListItem :to="tab.to">
                 <VIcon
@@ -57,12 +57,12 @@
         style="position: relative; z-index: 999;"
       >
         <VTabs
-          v-model="localUserTab"
+          v-model="activeTab"
           class="v-tabs-pill"
         >
           <VTab
             v-for="tab in tabs"
-            :key="tab.icon"
+            :key="tab.title"
             :to="tab.to"
           >
             <VIcon
@@ -76,14 +76,14 @@
       </VCard>
     </section>
     <div class="productsrouter">
-      <slot />
+      <RouterView />
     </div>
   </div>
 </template>
 
 <script setup>
 import { onMounted, ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { RouterView, useRouter } from 'vue-router'
 
 const props = defineProps({
   drawerTitle: {
@@ -98,15 +98,33 @@ const props = defineProps({
 })
 
 const drawer = ref(false)
+const activeTab = ref(null)
 const router = useRouter()
-const localUserTab = ref(null)
 
 onMounted(() => {
-  localUserTab.value = props.userTab
+  setActiveTab(router.currentRoute.value)
 })
 
+router.afterEach(to => {
+  setActiveTab(to)
+})
+
+function setActiveTab(route) {
+  const currentRouteName = route.name
+  const activeTabInfo = props.tabs.find(tab => tab.to === currentRouteName || (tab.children && tab.children.some(child => child.to === currentRouteName)))
+  if (activeTabInfo) {
+    if (activeTabInfo.children) {
+      activeTab.value = activeTabInfo.to // Keep the top-level tab selected
+    } else {
+      activeTab.value = currentRouteName // Set the active tab to the current route name
+    }
+  } else {
+    activeTab.value = null
+  }
+}
+
 function navigateTo(to) {
-  router.push(to)
+  router.push({ name: to })
 }
 </script>
 
