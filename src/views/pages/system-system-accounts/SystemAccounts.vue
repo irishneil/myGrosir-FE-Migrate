@@ -182,29 +182,29 @@
           </tfoot>
         </VCol>
       </VRow>
+      <VDivider />
+      <VCardText class="d-flex align-center flex-wrap justify-space-between gap-4 py-3 px-5">
+        <span class="text-sm text-disabled">
+          {{
+            ((currentPage - 1) * rowPerPage + 1) +
+              ' to ' +
+              Math.min(currentPage * rowPerPage, filteredUsers.length) +
+              ' of ' +
+              filteredUsers.length +
+              ' entries'
+          }}
+        </span>
+
+        <VPagination
+          v-model="currentPage"
+          size="small"
+          :total-visible="5"
+          :length="totalPage"
+        />
+      </VCardText>
     </VCard>
 
     <VDivider />
-
-    <VCardText class="d-flex align-center flex-wrap justify-space-between gap-4 py-3 px-5">
-      <span class="text-sm text-disabled">
-        {{
-          ((currentPage - 1) * rowPerPage + 1) +
-            ' to ' +
-            Math.min(currentPage * rowPerPage, filteredUsers.length) +
-            ' of ' +
-            filteredUsers.length +
-            ' entries'
-        }}
-      </span>
-
-      <VPagination
-        v-model="currentPage"
-        size="small"
-        :total-visible="5"
-        :length="totalPage"
-      />
-    </VCardText>
   </section>
 </template>
 
@@ -225,7 +225,11 @@ const filteredUsers = computed(() => {
   
   return users.filter(user =>
     user.fullName.toLowerCase().includes(query) ||
-    user.email.toLowerCase().includes(query),
+    user.email.toLowerCase().includes(query) ||
+    user.role.toLowerCase().includes(query) ||
+    user.currentPlan.toLowerCase().includes(query) ||
+    user.billing.toLowerCase().includes(query) ||
+    user.status.toLowerCase().includes(query),
   )
 })
 
@@ -270,5 +274,6 @@ const sortBy = column => {
 
 <style scoped>
 .v-icon.sortable {
-  color: red; }
+  color: red;
+}
 </style>

@@ -1,27 +1,3 @@
-<script setup>
-import AuthProvider from '@/views/pages/authentication/AuthProvider.vue'
-import { useGenerateImageVariant } from '@core/composable/useGenerateImageVariant'
-import { VNodeRenderer } from '@layouts/components/VNodeRenderer'
-import { themeConfig } from '@themeConfig'
-import {
-  emailValidator,
-  requiredValidator,
-} from '@validators'
-import authV2LoginIllustrationBorderedDark from '@images/pages/auth-v2-login-illustration-bordered-dark.png'
-import authV2LoginIllustrationBorderedLight from '@images/pages/auth-v2-login-illustration-bordered-light.png'
-import authV2LoginIllustrationDark from '@images/pages/auth-v2-login-illustration-dark.png'
-import authV2LoginIllustrationLight from '@images/pages/auth-v2-login-illustration-light.png'
-import authV2MaskDark from '@images/pages/misc-mask-dark.png'
-import authV2MaskLight from '@images/pages/misc-mask-light.png'
-
-const authThemeImg = useGenerateImageVariant(authV2LoginIllustrationLight, authV2LoginIllustrationDark, authV2LoginIllustrationBorderedLight, authV2LoginIllustrationBorderedDark, true)
-const authThemeMask = useGenerateImageVariant(authV2MaskLight, authV2MaskDark)
-const isPasswordVisible = ref(false)
-const email = ref('admin@demo.com')
-const password = ref('admin')
-const rememberMe = ref(false)
-</script>
-
 <template>
   <VRow
     no-gutters
@@ -39,7 +15,6 @@ const rememberMe = ref(false)
             class="auth-illustration mt-16 mb-2"
           />
         </div>
-
         <VImg
           :src="authThemeMask"
           class="auth-footer-mask"
@@ -67,26 +42,12 @@ const rememberMe = ref(false)
             Welcome to {{ themeConfig.app.title }}! 👋🏻
           </h5>
           <p class="mb-0">
-            Please sign-in to your account and start the adventure
+            Please sign in to your account and start the adventure.
           </p>
         </VCardText>
         <VCardText>
-          <VAlert
-            color="primary"
-            variant="tonal"
-          >
-            <p class="text-caption mb-2">
-              Admin Email: <strong>admin@demo.com</strong> / Pass: <strong>admin</strong>
-            </p>
-            <p class="text-caption mb-0">
-              Client Email: <strong>client@demo.com</strong> / Pass: <strong>client</strong>
-            </p>
-          </VAlert>
-        </VCardText>
-        <VCardText>
-          <VForm @submit.prevent="() => {}">
+          <VForm @submit.prevent="login">
             <VRow>
-              <!-- email -->
               <VCol cols="12">
                 <VTextField
                   v-model="email"
@@ -96,7 +57,6 @@ const rememberMe = ref(false)
                 />
               </VCol>
 
-              <!-- password -->
               <VCol cols="12">
                 <VTextField
                   v-model="password"
@@ -114,7 +74,7 @@ const rememberMe = ref(false)
                   />
                   <a
                     class="text-primary ms-2 mb-1"
-                    href="#"
+                    href="reset-password"
                   >
                     Forgot Password?
                   </a>
@@ -128,34 +88,11 @@ const rememberMe = ref(false)
                 </VBtn>
               </VCol>
 
-              <!-- create account -->
-              <VCol
-                cols="12"
-                class="text-center"
-              >
-                <span>New on our platform?</span>
-                <a
-                  class="text-primary ms-2"
-                  href="#"
-                >
-                  Create an account
-                </a>
-              </VCol>
               <VCol
                 cols="12"
                 class="d-flex align-center"
               >
                 <VDivider />
-                <span class="mx-4">or</span>
-                <VDivider />
-              </VCol>
-
-              <!-- auth providers -->
-              <VCol
-                cols="12"
-                class="text-center"
-              >
-                <AuthProvider />
               </VCol>
             </VRow>
           </VForm>
@@ -164,6 +101,47 @@ const rememberMe = ref(false)
     </VCol>
   </VRow>
 </template>
+
+<script setup>
+import { useAuthStore } from '@/stores/authStore'
+import { useGenerateImageVariant } from '@core/composable/useGenerateImageVariant'
+import authV2LoginIllustrationBorderedDark from '@images/pages/auth-v2-login-illustration-bordered-dark.png'
+import authV2LoginIllustrationBorderedLight from '@images/pages/auth-v2-login-illustration-bordered-light.png'
+import authV2LoginIllustrationDark from '@images/pages/auth-v2-login-illustration-dark.png'
+import authV2LoginIllustrationLight from '@images/pages/auth-v2-login-illustration-light.png'
+import authV2MaskDark from '@images/pages/misc-mask-dark.png'
+import authV2MaskLight from '@images/pages/misc-mask-light.png'
+import { VNodeRenderer } from '@layouts/components/VNodeRenderer'
+import { themeConfig } from '@themeConfig'
+import { emailValidator, requiredValidator } from '@validators'
+import { ref } from 'vue'
+
+const authStore = useAuthStore()
+
+const authThemeImg = useGenerateImageVariant(
+  authV2LoginIllustrationLight,
+  authV2LoginIllustrationDark,
+  authV2LoginIllustrationBorderedLight,
+  authV2LoginIllustrationBorderedDark,
+  true,
+)
+
+const authThemeMask = useGenerateImageVariant(authV2MaskLight, authV2MaskDark)
+const isPasswordVisible = ref(false)
+const email = ref('')
+const password = ref('')
+const rememberMe = ref(false)
+
+const login = async () => {
+  try {
+    await authStore.login(email.value, password.value)
+
+    // Login successful, perform any necessary actions (e.g., redirect)
+  } catch (error) {
+    // Handle login error (e.g., display error message)
+  }
+}
+</script>
 
 <style lang="scss">
 @use "@core/scss/template/pages/page-auth.scss";
