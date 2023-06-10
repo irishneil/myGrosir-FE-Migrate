@@ -18,6 +18,14 @@ const authRoutes = [
         },
       },
       {
+        path: 'forgot-password',
+        name: 'forgot-password',
+        component: () => import('@/views/pages/authentication/ForgotPassword.vue'),
+        meta: {
+          layout: "full",
+        },
+      },
+      {
         path: 'reset-password',
         name: 'reset-password',
         component: () => import('@/views/pages/authentication/PasswordReset.vue'),

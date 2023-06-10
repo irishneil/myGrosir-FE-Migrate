@@ -28,10 +28,37 @@ class AuthService {
   }
 
   login(user) {
-    return axios.post('v1/auth', {
+    console.log('login function called')
+    
+    const requestData = {
       username: user.email,
       password: user.password,
-    })
+    }
+  
+    return axios.post('v1/auth', requestData)
+      .then(response => {
+        const { access_token, expires_in } = response.data.data
+        if (access_token) {
+          this.saveToken(access_token)
+          console.log('Access Token:', access_token)
+          console.log('Expires In:', expires_in)
+        }
+        
+        return response
+      })
+      .catch(error => {
+        console.log('Login error', error)
+        throw error
+      })
+  }
+  
+  async saveToken(access_token, expires_in) {
+    const expirationTime = Date.now() + parseInt(expires_in, 10) * 1000 // Parse the expires_in value as an integer
+
+    this.accessToken = access_token
+    this.expirationTime = expirationTime
+    localStorage.setItem('token', access_token)
+    localStorage.setItem('expirationTime', expirationTime.toString())
   }
 
   logout() {

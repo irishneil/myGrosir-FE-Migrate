@@ -74,7 +74,7 @@
                   />
                   <a
                     class="text-primary ms-2 mb-1"
-                    href="reset-password"
+                    href="forgot-password"
                   >
                     Forgot Password?
                   </a>
@@ -133,8 +133,21 @@ const password = ref('')
 const rememberMe = ref(false)
 
 const login = async () => {
+  console.log('email '+ email.value)
+  console.log('password '+ password.value)
   try {
-    await authStore.login(email.value, password.value)
+    const payload = {
+      email: email.value,
+      password: password.value,
+    }
+
+    await authStore.login(payload)
+
+
+    // Redirect to Dashboard
+    const router = useRouter()
+
+    router.push('/dashboard') 
 
     // Login successful, perform any necessary actions (e.g., redirect)
   } catch (error) {

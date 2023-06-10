@@ -6,6 +6,7 @@ import { defineStore } from 'pinia'
 export const useAuthStore = defineStore('auth', {
   state: () => ({
     accountData: null,
+    refreshToken: null,
     isRegisterFinish: false,
   }),
   actions: {
@@ -17,13 +18,22 @@ export const useAuthStore = defineStore('auth', {
         
         return true
       }
-
+    
       try {
         const response = await AuthService.login(user)
         if (response.status === 200) {
-          await this.session.setToken(response.data.data.access_token)
+          const { access_token, refresh_token, other_token, expires_in } = response.data.data
+
+          await this.setTokens(access_token, refresh_token, other_token, expires_in)
           await this.profile()
-          
+
+          // Store access_token and expires_in in local storage
+          localStorage.setItem('access_token', access_token)
+          localStorage.setItem('expires_in', expires_in)
+    
+          // Add this line to log the access token
+          console.log('Access Token:', localStorage.getItem('access_token'))
+    
           return Promise.resolve(response)
         } else {
           this.loginFailure()
@@ -36,6 +46,15 @@ export const useAuthStore = defineStore('auth', {
         return Promise.reject(error)
       }
     },
+    
+    setTokens(access_token, refresh_token, other_token) {
+      this.accessToken = access_token
+      this.refreshToken = refresh_token
+      this.expiresIn = expires_in
+
+      // Set other token properties if needed
+    },
+    
     async profile() {
       try {
         const response = await AuthService.profile()
