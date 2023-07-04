@@ -46,13 +46,17 @@
           </p>
         </VCardText>
         <VCardText>
-          <VForm @submit.prevent="login">
+          <VForm
+            ref="formRef"
+            @submit.prevent="login"
+          >
             <VRow>
               <VCol cols="12">
                 <VTextField
                   v-model="email"
                   label="Email"
                   type="email"
+                  :readonly="loading"
                   :rules="[requiredValidator, emailValidator]"
                 />
               </VCol>
@@ -64,6 +68,7 @@
                   :rules="[requiredValidator]"
                   :type="isPasswordVisible ? 'text' : 'password'"
                   :append-inner-icon="isPasswordVisible ? 'tabler-eye-off' : 'tabler-eye'"
+                  :readonly="loading"
                   @click:append-inner="isPasswordVisible = !isPasswordVisible"
                 />
 
@@ -83,6 +88,7 @@
                 <VBtn
                   block
                   type="submit"
+                  :loading="loading"
                 >
                   Login
                 </VBtn>
@@ -133,18 +139,25 @@ const isPasswordVisible = ref(false)
 const email = ref('')
 const password = ref('')
 const rememberMe = ref(false)
+const loading= ref(false)
+const formRef = ref()
 
 const login = async () => {
+  if(!formRef.value) return
+  const result = await formRef.value.validate()
+  if(!result.valid || loading.value) return
   try {
-
+    loading.value = true
     await authStore.login({ email: email.value, password: password.value })
-
     await router.push('/dashboard') 
 
+    // todo: show toast message
     // Login successful, perform any necessary actions (e.g., redirect)
   } catch (error) {
+    loading.value = false
     console.log(error)
 
+    // todo: show error toast message
     // Handle login error (e.g., display error message)
   }
 }
