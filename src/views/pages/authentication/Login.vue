@@ -65,7 +65,7 @@
                 <VTextField
                   v-model="password"
                   label="Password"
-                  :rules="[requiredValidator]"
+                  :rules="[requiredValidator, passwordValidator]"
                   :type="isPasswordVisible ? 'text' : 'password'"
                   :append-inner-icon="isPasswordVisible ? 'tabler-eye-off' : 'tabler-eye'"
                   :readonly="loading"
@@ -119,7 +119,7 @@ import authV2MaskDark from '@images/pages/misc-mask-dark.png'
 import authV2MaskLight from '@images/pages/misc-mask-light.png'
 import { VNodeRenderer } from '@layouts/components/VNodeRenderer'
 import { themeConfig } from '@themeConfig'
-import { emailValidator, requiredValidator } from '@validators'
+import { emailValidator, passwordValidator, requiredValidator } from '@validators'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 
