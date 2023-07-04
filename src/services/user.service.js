@@ -1,5 +1,5 @@
 // eslint-disable-next-line import/no-cycle
-import axios from '@axios'
+import axios from '@/utils/axios'
 
 class UserService {
   getUsers(params) {

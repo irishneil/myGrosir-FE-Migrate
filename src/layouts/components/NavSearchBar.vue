@@ -1,7 +1,7 @@
 <script setup>
-import Shepherd from 'shepherd.js'
-import axios from '@axios'
+import axios from '@/utils/axios'
 import { useThemeConfig } from '@core/composable/useThemeConfig'
+import Shepherd from 'shepherd.js'
 
 const { appContentLayoutNav } = useThemeConfig()
 
