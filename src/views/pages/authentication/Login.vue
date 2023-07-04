@@ -115,8 +115,10 @@ import { VNodeRenderer } from '@layouts/components/VNodeRenderer'
 import { themeConfig } from '@themeConfig'
 import { emailValidator, requiredValidator } from '@validators'
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 
 const authStore = useAuthStore()
+const router = useRouter()
 
 const authThemeImg = useGenerateImageVariant(
   authV2LoginIllustrationLight,
@@ -133,24 +135,16 @@ const password = ref('')
 const rememberMe = ref(false)
 
 const login = async () => {
-  console.log('email '+ email.value)
-  console.log('password '+ password.value)
   try {
-    const payload = {
-      email: email.value,
-      password: password.value,
-    }
 
-    await authStore.login(payload)
+    await authStore.login({ email: email.value, password: password.value })
 
-
-    // Redirect to Dashboard
-    const router = useRouter()
-
-    router.push('/dashboard') 
+    await router.push('/dashboard') 
 
     // Login successful, perform any necessary actions (e.g., redirect)
   } catch (error) {
+    console.log(error)
+
     // Handle login error (e.g., display error message)
   }
 }
