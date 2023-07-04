@@ -1,4 +1,5 @@
 <script setup>
+import userService from '@/services/user.service'
 import { useGenerateImageVariant } from '@core/composable/useGenerateImageVariant'
 import authV2ResetPasswordIllustrationDark from '@images/pages/auth-v2-reset-password-illustration-dark.png'
 import authV2ResetPasswordIllustrationLight from '@images/pages/auth-v2-reset-password-illustration-light.png'
@@ -6,6 +7,10 @@ import authV2MaskDark from '@images/pages/misc-mask-dark.png'
 import authV2MaskLight from '@images/pages/misc-mask-light.png'
 import { VNodeRenderer } from '@layouts/components/VNodeRenderer'
 import { themeConfig } from '@themeConfig'
+import { confirmedValidator, passwordValidator, requiredValidator } from '@validators'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
 
 const form = ref({
   newPassword: '',
@@ -16,6 +21,27 @@ const authThemeImg = useGenerateImageVariant(authV2ResetPasswordIllustrationLigh
 const authThemeMask = useGenerateImageVariant(authV2MaskLight, authV2MaskDark)
 const isPasswordVisible = ref(false)
 const isConfirmPasswordVisible = ref(false)
+const loading = ref(false)
+
+const formRef = ref()
+async function handleResetPassword() {
+  if(!formRef.value) return
+  const result = await formRef.value.validate()
+  if(!result.valid || loading.value) return
+  try {
+    loading.value = true
+
+    // todo: get token from query
+    await userService.resetNewPassword({ ...form.value, token: "" })
+
+    // todo: show toast message 
+    await router.push({ name: "Login" })
+  } catch(err) {
+    loading.value = false
+
+    // todo: show toast error message 
+  }
+}
 </script>
 
 <template>
@@ -62,22 +88,28 @@ const isConfirmPasswordVisible = ref(false)
           <h5 class="text-h5 mb-1">
             Reset Password 🔒
           </h5>
+          <!-- todo: get user email from query -->
           <p class="mb-0">
             for <span class="font-weight-bold">john.doe@email.com</span>
           </p>
         </VCardText>
 
         <VCardText>
-          <VForm @submit.prevent="() => {}">
+          <VForm
+            ref="formRef"
+            @submit.prevent="handleResetPassword"
+          >
             <VRow>
               <!-- password -->
               <VCol cols="12">
                 <AppTextField
                   v-model="form.newPassword"
                   autofocus
+                  :readonly="loading"
                   label="New Password"
                   :type="isPasswordVisible ? 'text' : 'password'"
                   :append-inner-icon="isPasswordVisible ? 'tabler-eye-off' : 'tabler-eye'"
+                  :rules="[requiredValidator, passwordValidator]"
                   @click:append-inner="isPasswordVisible = !isPasswordVisible"
                 />
               </VCol>
@@ -86,9 +118,11 @@ const isConfirmPasswordVisible = ref(false)
               <VCol cols="12">
                 <AppTextField
                   v-model="form.confirmPassword"
+                  :readonly="loading"
                   label="Confirm Password"
                   :type="isConfirmPasswordVisible ? 'text' : 'password'"
                   :append-inner-icon="isConfirmPasswordVisible ? 'tabler-eye-off' : 'tabler-eye'"
+                  :rules="[requiredValidator, passwordValidator, val => confirmedValidator(val, form.newPassword)]"
                   @click:append-inner="isConfirmPasswordVisible = !isConfirmPasswordVisible"
                 />
               </VCol>
@@ -98,16 +132,17 @@ const isConfirmPasswordVisible = ref(false)
                 <VBtn
                   block
                   type="submit"
+                  :loading="loading"
                 >
                   Set New Password
                 </VBtn>
               </VCol>
-
               <!-- back to login -->
+              <!-- :to="{ name: 'pages-authentication-login-v2' }" -->
               <VCol cols="12">
                 <RouterLink
                   class="d-flex align-center justify-center"
-                  :to="{ name: 'pages-authentication-login-v2' }"
+                  :to="{name: 'Login'}"
                 >
                   <VIcon
                     icon="tabler-chevron-left"
