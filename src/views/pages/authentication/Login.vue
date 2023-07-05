@@ -46,13 +46,17 @@
           </p>
         </VCardText>
         <VCardText>
-          <VForm @submit.prevent="login">
+          <VForm
+            ref="formRef"
+            @submit.prevent="login"
+          >
             <VRow>
               <VCol cols="12">
                 <VTextField
                   v-model="email"
                   label="Email"
                   type="email"
+                  :readonly="loading"
                   :rules="[requiredValidator, emailValidator]"
                 />
               </VCol>
@@ -61,9 +65,10 @@
                 <VTextField
                   v-model="password"
                   label="Password"
-                  :rules="[requiredValidator]"
+                  :rules="[requiredValidator, passwordValidator]"
                   :type="isPasswordVisible ? 'text' : 'password'"
                   :append-inner-icon="isPasswordVisible ? 'tabler-eye-off' : 'tabler-eye'"
+                  :readonly="loading"
                   @click:append-inner="isPasswordVisible = !isPasswordVisible"
                 />
 
@@ -83,6 +88,7 @@
                 <VBtn
                   block
                   type="submit"
+                  :loading="loading"
                 >
                   Login
                 </VBtn>
@@ -113,10 +119,12 @@ import authV2MaskDark from '@images/pages/misc-mask-dark.png'
 import authV2MaskLight from '@images/pages/misc-mask-light.png'
 import { VNodeRenderer } from '@layouts/components/VNodeRenderer'
 import { themeConfig } from '@themeConfig'
-import { emailValidator, requiredValidator } from '@validators'
+import { emailValidator, passwordValidator, requiredValidator } from '@validators'
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 
 const authStore = useAuthStore()
+const router = useRouter()
 
 const authThemeImg = useGenerateImageVariant(
   authV2LoginIllustrationLight,
@@ -131,26 +139,25 @@ const isPasswordVisible = ref(false)
 const email = ref('')
 const password = ref('')
 const rememberMe = ref(false)
+const loading= ref(false)
+const formRef = ref()
 
 const login = async () => {
-  console.log('email '+ email.value)
-  console.log('password '+ password.value)
+  if(!formRef.value) return
+  const result = await formRef.value.validate()
+  if(!result.valid || loading.value) return
   try {
-    const payload = {
-      email: email.value,
-      password: password.value,
-    }
+    loading.value = true
+    await authStore.login({ email: email.value, password: password.value })
+    await router.push('/dashboard') 
 
-    await authStore.login(payload)
-
-
-    // Redirect to Dashboard
-    const router = useRouter()
-
-    router.push('/dashboard') 
-
+    // todo: show toast message
     // Login successful, perform any necessary actions (e.g., redirect)
   } catch (error) {
+    loading.value = false
+    console.log(error)
+
+    // todo: show error toast message
     // Handle login error (e.g., display error message)
   }
 }

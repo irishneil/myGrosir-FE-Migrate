@@ -1,19 +1,16 @@
-﻿import axios from 'axios'
-import router from '@/router'
+import axios from 'axios'
 
 const axiosIns = axios.create({
 // You can add your headers here
 // ================================
-   baseURL: 'https://dev-api.mygrosir.com',
-// timeout: 1000,
-// headers: {'X-Custom-Header': 'foobar'}
+  baseURL: 'https://dev-api.mygrosir.com',
 })
 
 
 // ℹ️ Add request interceptor to send the authorization header on each subsequent request after login
 axiosIns.interceptors.request.use(config => {
   // Retrieve token from localStorage
-  const token = localStorage.getItem('accessToken')
+  const token = JSON.parse(localStorage.getItem('authToken') || null)
 
   // If token is found
   if (token) {
@@ -22,7 +19,7 @@ axiosIns.interceptors.request.use(config => {
 
     // Set authorization header
     // ℹ️ JSON.parse will convert token to string
-    config.headers.Authorization = token ? `Bearer ${JSON.parse(token)}` : ''
+    config.headers.Authorization = token ? `Bearer ${token.access_token}` : ''
   }
 
   // Return modified config
@@ -34,14 +31,15 @@ axiosIns.interceptors.response.use(response => {
   return response
 }, error => {
   // Handle error
-  if (error.response.status === 401) {
+  if (error.response && error.response.status === 401) {
     // ℹ️ Logout user and redirect to login page
     // Remove "userData" from localStorage
-    localStorage.removeItem('userData')
+    // localStorage.removeItem('userData')
 
     // Remove "accessToken" from localStorage
-    localStorage.removeItem('accessToken')
-    localStorage.removeItem('userAbilities')
+    localStorage.removeItem('authToken')
+
+    // localStorage.removeItem('userAbilities')
 
     // If 401 response returned from api
     router.push('/login')

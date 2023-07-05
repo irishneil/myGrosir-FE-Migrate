@@ -1,4 +1,5 @@
 <script setup>
+import userService from '@/services/user.service'
 import { useGenerateImageVariant } from '@core/composable/useGenerateImageVariant'
 import authV2ForgotPasswordIllustrationDark from '@images/pages/auth-v2-forgot-password-illustration-dark.png'
 import authV2ForgotPasswordIllustrationLight from '@images/pages/auth-v2-forgot-password-illustration-light.png'
@@ -6,10 +7,37 @@ import authV2MaskDark from '@images/pages/misc-mask-dark.png'
 import authV2MaskLight from '@images/pages/misc-mask-light.png'
 import { VNodeRenderer } from '@layouts/components/VNodeRenderer'
 import { themeConfig } from '@themeConfig'
+import { emailValidator, requiredValidator } from '@validators'
 
 const email = ref('')
+const loading = ref(false)
+
+
 const authThemeImg = useGenerateImageVariant(authV2ForgotPasswordIllustrationLight, authV2ForgotPasswordIllustrationDark)
 const authThemeMask = useGenerateImageVariant(authV2MaskLight, authV2MaskDark)
+
+const formRef = ref()
+
+async function handleResetPassword() {
+  if(formRef.value) {
+    const result = await formRef.value.validate()
+    if(result.valid) {
+      loading.value = true
+      try {
+        await userService.resetPasswordEmail({ email: email.value })
+
+        // todo: show toast message
+        email.value = ''
+      } catch(err) {
+        console.log(err)
+
+        // todo: show toast error message 
+      } finally {
+        loading.value = false
+      }
+    }
+  }
+}
 </script>
 
 <template>
@@ -61,15 +89,21 @@ const authThemeMask = useGenerateImageVariant(authV2MaskLight, authV2MaskDark)
         </VCardText>
 
         <VCardText>
-          <VForm @submit.prevent="() => {}">
+          <VForm
+            ref="formRef"
+            @submit.prevent="handleResetPassword"
+          >
             <VRow>
               <!-- email -->
               <VCol cols="12">
                 <AppTextField
+                  ref="emailInput"
                   v-model="email"
+                  :readonly="loading"
                   autofocus
                   label="Email"
                   type="email"
+                  :rules="[requiredValidator, emailValidator]"
                 />
               </VCol>
 
@@ -78,6 +112,7 @@ const authThemeMask = useGenerateImageVariant(authV2MaskLight, authV2MaskDark)
                 <VBtn
                   block
                   type="submit"
+                  :loading="loading"
                 >
                   Send Reset Link
                 </VBtn>
