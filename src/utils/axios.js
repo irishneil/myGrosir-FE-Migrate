@@ -1,4 +1,4 @@
-import router from '@/router'
+// import router from '@/router'
 import axios from 'axios'
 
 
@@ -44,7 +44,8 @@ axiosIns.interceptors.response.use(response => {
     // localStorage.removeItem('userAbilities')
 
     // If 401 response returned from api
-    await router.push('/login')
+    // await router.push('/login')
+    window.location.href = '/auth/login'
   }
   else {
     return Promise.reject(error)
