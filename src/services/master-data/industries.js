@@ -31,9 +31,10 @@ export async function updateIndustries(industryId, { name }) {
 
 export async function deleteIndustry(industryId) {
   try {
-    const res = await axios.delete(`v1/industries/${industryId}`)
+    await axios.delete(`v1/industries/${industryId}`)
+    zz
     
-    return res.data
+    return true
   } catch(err) {
     return Promise.reject(err)
   }
