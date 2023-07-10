@@ -6,15 +6,18 @@ import { VDataTable } from "vuetify/labs/VDataTable"
 const props = defineProps({
   tableHeaders: Array,
   loadingData: Boolean,
-  creatingData: Boolean,
+  savingData: Boolean,
+  deletingData: Boolean, 
   tableData: Array,
 })
 
-const emits = defineEmits(['closeDialog', "saveItem", "deleteItem"])
+const emits = defineEmits(['closeDialog', "saveItem", "deleteItem", "refresh"])
 
 const showDialog = defineModel('showDialog', { default: false })
 const showPasswordConfirmationModel = defineModel('passwordConfirmationModel', { default: false })
-const sortBy = defineModel('sortBy')
+
+// const sortBy = defineModel('sortBy')
+// const sortBy = ref([{ key: "created_at", order: "desc" }])
 const itemInput = defineModel('itemInput', { default: "" })
 
 const tableOptions = defineModel('tableOptions', { default: {
@@ -69,7 +72,7 @@ function openDialog(type) {
 }
 
 function closeDialog() {
-  if (!props.creatingData) {
+  if (!props.savingData) {
     showDialog.value = false
     Object.assign(dialog, defaultOptions)
     if (editItemId.value) editItemId.value = null
@@ -84,7 +87,7 @@ async function onSave() {
   const result = await formRef.value.validate()
 
   // form invalid || input value empty || request already in progress
-  if (!result.valid || !itemInput.value || props.creatingData)
+  if (!result.valid || !itemInput.value || props.savingData)
     return
 
   const itemData = {
@@ -97,8 +100,9 @@ async function onSave() {
   }
   emits('saveItem', itemData)
 }
-function handleEditItem(name) {
+function handleEditItem({ name, id }) {
   itemInput.value = name
+  editItemId.value = id
   openDialog('Edit')
 }
 </script>
@@ -127,12 +131,14 @@ function handleEditItem(name) {
               v-model="itemInput"
               placeholder="Name"
               :rules="[requiredValidator]"
-              :readonly="props.creatingData"
+              :readonly="props.savingData"
             />
             <div class="text-end mt-10">
               <VBtn
+                :loading="props.savingData"
                 color="primary"
                 type="submit"
+                :disabled="props.savingData"
               >
                 Save
               </VBtn>
@@ -166,14 +172,17 @@ function handleEditItem(name) {
             color="primary"
             type="submit"
             class="mr-3"
-            @click="emits('deleteItem', deleteItemId)"
+            :loading="props.deletingData"
+            :disabled="props.deletingData"
+            @click="!props.deletingData && emits('deleteItem', deleteItemId)"
           >
             Yes Delete it!
           </VBtn>
           <VBtn
             variant="outlined"
             color="error"
-            @click="showPasswordConfirmationModel = false"
+            :disabled="props.deletingData"
+            @click="!props.deletingData && (showPasswordConfirmationModel = false)"
           >
             Cancel
           </VBtn>
@@ -203,15 +212,23 @@ function handleEditItem(name) {
         </VRow>
       </template>
       <template #text>
+        <!-- :sort-by="sortBy" -->
         <VDataTable
           v-model:page="tableOptions.currentPage"
-          :sort-by="sortBy"
+          :loading="props.loadingData"
           :headers="props.tableHeaders"
           :items="props.tableData"
           item-key="name"
           :items-per-page="tableOptions.pageLimit"
           hide-default-footer
         >
+          <template #loader>
+            <VProgressCircular
+              class="table-loading"
+              indeterminate
+              :size="40"
+            />
+          </template>
           <template #item.image="{ item }">
             <VImg
               v-if="item.columns.image"
@@ -239,7 +256,7 @@ function handleEditItem(name) {
                   variant="text"
                   block
                   class="justify-start"
-                  @click="handleEditItem(item.raw.name)"
+                  @click="handleEditItem({name: item.raw.name, id: item.raw.id})"
                 >
                   Edit
                 </VBtn>
@@ -275,6 +292,12 @@ function handleEditItem(name) {
                   of {{ tableOptions.totalItems }} entries
                 </span>
               </div>
+              <VBtn
+                class="ml-2"
+                density="compact"
+                icon="mdi-refresh"
+                @click="emits('refresh')"
+              />
               <VPagination
                 v-model="tableOptions.currentPage"
                 class="ml-auto"
@@ -290,3 +313,12 @@ function handleEditItem(name) {
     </VCard>
   </div>
 </template>
+
+<style>
+  .table-loading {
+    position: absolute;
+    inset-block-start:50%;
+    inset-inline-start: 50%;
+    transform: translate(-50%, -50%);
+  }
+</style>
