@@ -1,4 +1,6 @@
+// import router from '@/router'
 import axios from 'axios'
+
 
 const axiosIns = axios.create({
 // You can add your headers here
@@ -29,7 +31,7 @@ axiosIns.interceptors.request.use(config => {
 // ℹ️ Add response interceptor to handle 401 response
 axiosIns.interceptors.response.use(response => {
   return response
-}, error => {
+}, async error => {
   // Handle error
   if (error.response && error.response.status === 401) {
     // ℹ️ Logout user and redirect to login page
@@ -42,7 +44,8 @@ axiosIns.interceptors.response.use(response => {
     // localStorage.removeItem('userAbilities')
 
     // If 401 response returned from api
-    router.push('/login')
+    // await router.push('/login')
+    window.location.href = '/auth/login'
   }
   else {
     return Promise.reject(error)

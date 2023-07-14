@@ -60,12 +60,12 @@
                   :rules="[requiredValidator, emailValidator]"
                 />
               </VCol>
-
+              <!-- passwordValidator -->
               <VCol cols="12">
                 <VTextField
                   v-model="password"
                   label="Password"
-                  :rules="[requiredValidator, passwordValidator]"
+                  :rules="[requiredValidator, ]"
                   :type="isPasswordVisible ? 'text' : 'password'"
                   :append-inner-icon="isPasswordVisible ? 'tabler-eye-off' : 'tabler-eye'"
                   :readonly="loading"

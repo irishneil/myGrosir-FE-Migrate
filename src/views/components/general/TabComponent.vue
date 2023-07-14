@@ -42,7 +42,16 @@
                     <span
                       class="me-1"
                       style="font-size: 18px;"
-                    >{{ tab.title }}</span>
+                    >
+                      {{ tab.title }} 
+                      <VChip
+                        label
+                        color="info"
+                        text-color="white"
+                      >
+                        {{ tab.totalItem }}
+                      </VChip>
+                    </span>
                   </section>
                 </button>
               </VListItem>
@@ -70,7 +79,18 @@
               :icon="tab.icon"
               class="me-1"
             />
-            <span>{{ tab.title }}</span>
+            <p class="mb-0 d-flex align-center">
+              <span class="d-inline-block mr-1">
+                {{ tab.title }} 
+              </span>
+              <VChip
+                label
+                size="x-small"
+                class="text-white bg-info"
+              >
+                {{ tab.totalItem }}
+              </VChip>
+            </p>
           </VTab>
         </VTabs>
       </VCard>
